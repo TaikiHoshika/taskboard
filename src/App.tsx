@@ -1,10 +1,6 @@
-import "./App.css";
-
-function App() {
+const App = () => {
     return (
-        <div>
-            init
-        </div>
+        <h1>init</h1>
     );
 }
 
