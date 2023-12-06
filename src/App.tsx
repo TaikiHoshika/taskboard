@@ -1,6 +1,11 @@
+import Task from "./pages/task/Task";
+import style from "./App.module.scss";
+
 const App = () => {
     return (
-        <h1>init</h1>
+        <div className={style.container}>
+            <Task />
+        </div>
     );
 }
 
