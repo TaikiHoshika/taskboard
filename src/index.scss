@@ -3,6 +3,7 @@ body {
     font-family: "M PLUS Rounded 1c", sans-serif;
     font-weight: 500;
     color: rgb(75, 75, 75);
+    background-color: var(--color-background);
 }
 
 * {
@@ -14,10 +15,11 @@ body {
     --color-main: rgb(255, 255, 255);
     --color-font: rgb(83, 93, 102);
     --color-primary: rgb(25, 137, 228);
-    --color-disable: rgb(217, 224, 230);
-    --color-background: rgb(244, 248, 251);
+    --color-primary-dark: rgb(22, 89, 175);
+    --color-disable: rgb(198, 197, 206);
+    --color-background: rgb(227, 232, 235);
     --color-background-modal: rgba(0, 0, 0, 0.6);
-    --color-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+    --style-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
 
     --border-radius: 4px;
 }

@@ -1,38 +1,27 @@
-import Stepper from "../../components/stepper/Stepper";
 import style from "./Task.module.scss";
-
-import IconPin from "@mui/icons-material/PushPin";
+import TaskCard from "./components/TaskCard";
 
 const Task = () => {
     return (
         <div className={style.container}>
-            <div className={style.task}>
-                <div className={`${style.infomation} ${style.isPinned}`}>
-                    <IconPin />
-                </div>
-                <div className={style.user}>
-                    <span>RilyHugu</span>
-                </div>
-                <div className={`${style.infomation} ${style.buyAt}`}>
-                    <span className={style.label}>購入日</span>
-                    <span>12/1 (2日経過)</span>
-                </div>
-                <div className={`${style.infomation} ${style.deliveryAt}`}>
-                    <span className={style.label}>納品予定日</span>
-                    <span>12/15 (残り14日)</span>
-                </div>
-                <div className={`${style.infomation} ${style.sales}`}>
-                    <span className={style.label}>売上</span>
-                    <span>3,000円 (2,340円)</span>
-                </div>
-                <div className={`${style.infomation} ${style.amount}`}>
-                    <span className={style.label}>納入枚数</span>
-                    <span>1点</span>
-                </div>
-                <div className={style.progress}>
-                    <Stepper steps={["確認", "ラフ", "清書", "納品"]} active={1} />
-                </div>
-            </div>
+            <TaskCard
+                user={"TestUser01"}
+                buyAt={new Date(2023, 11, 1, 0, 0, 0)}
+                deliveryAt={new Date(2023, 11, 10, 23, 59, 59)}
+                sales={3000}
+                amount={1}
+                step={0}
+                isPinned={true}
+            />
+            <TaskCard
+                user={"TestUser02"}
+                buyAt={new Date(2023, 10, 1, 0, 0, 0)}
+                deliveryAt={new Date(2023, 11, 10, 23, 59, 59)}
+                sales={6000}
+                amount={2}
+                step={2}
+                isPinned={false}
+            />
         </div>
     );
 }

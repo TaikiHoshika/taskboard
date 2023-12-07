@@ -5,7 +5,7 @@ type props = {
     active: number;
 }
 
-const Stepper = (props : props) => {
+const Stepper = (props: props) => {
     return (
         <div className={style.container}>
             {props.steps.map((step, index) => {

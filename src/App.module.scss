@@ -3,5 +3,14 @@
     width: 100vw;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    box-sizing: border-box;
+}
+
+.content {
+    height: 100%;
+
+    box-sizing: border-box;
+    overflow-y: scroll;
 }

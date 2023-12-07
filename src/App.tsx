@@ -1,10 +1,14 @@
-import Task from "./pages/task/Task";
+import { Outlet } from "react-router-dom";
 import style from "./App.module.scss";
+import Header from "./components/header/Header";
 
 const App = () => {
     return (
         <div className={style.container}>
-            <Task />
+            <Header />
+            <div className={style.content}>
+                <Outlet />
+            </div>
         </div>
     );
 }
