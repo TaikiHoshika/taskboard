@@ -9,44 +9,59 @@
 
 
 .task {
-    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 80px;
+    padding-left: 20px;
+    padding-right: 20px;
     
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
     display: flex;
+    box-sizing: border-box;
+
     flex-direction: row;
     align-items: center;
     gap: 10px;
 
-    > .username {
+    .infomation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        > .label {
+            font-weight: bold;
+        }
+    }
+
+    > .isPinned {
+        width: 50px;
+        svg {
+            height: 35px;
+            width: auto;
+            color: var(--color-disable);
+        }
+    }
+
+    > .user {
         font-weight: bold;
+        font-size: 20px;
+        width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-left: 10px;
     }
 
-    > .buyAt {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        > .label {
-            font-weight: bold;
-        }
+    > .buyAt, > .deliveryAt, > .sales {
+        width: 200px;
     }
 
-    > .deliveryAt {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        > .label {
-            font-weight: bold;
-        }
+    > .amount {
+        width: 100px;
     }
 
-    > .sales {
+    > .progress {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        > .label {
-            font-weight: bold;
-        }
+        justify-content: center;
+        width: 250px;
     }
 }
