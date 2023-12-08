@@ -26,13 +26,13 @@ const getDateDistance = (to: Date, from: Date): number => {
 
 const TaskCard = (props: props) => {
     const [isPinned, setIsPinned] = useState(props.isPinned);
-    const handleOnClickPinButton = () => {
+    const handleOnClickPinButton = async () => {
         setIsPinned(!isPinned);
         // バックエンドに問い合わせDB更新
     }
 
     return (
-        <div className={style.task}>
+        <div className={style.container}>
             <div className={`${style.infomation} ${style.isPinned} ${isPinned && style.active}`}>
                 <button onClick={handleOnClickPinButton}>
                     <IconPin />
