@@ -6,7 +6,7 @@ const App = () => {
     return (
         <div className={style.container}>
             <Header />
-            <div className={style.content}>
+            <div className={style.content} id="modal">
                 <Outlet />
             </div>
         </div>
