@@ -11,24 +11,24 @@ const Header = () => {
                 <span className={style.title}>雑にタスク管理くん(α)</span>
             </div>
             <div className={style.routes}>
-                <div className={style.link}>
-                    <NavLink
-                        to="/"
-                        className={({isActive}) => (isActive ? style.active : "")}
-                    >
+                <NavLink
+                    to="/"
+                    className={({isActive}) => (isActive ? style.active : "")}
+                >
+                    <div className={style.link}>
                         <IconDashboard />
                         <span>ダッシュボード</span>
-                    </NavLink>
-                </div>
-                <div className={style.link}>
-                    <NavLink
-                        to="/task"
-                        className={({isActive}) => (isActive ? style.active : "")}
-                    >
+                    </div>
+                </NavLink>
+                <NavLink
+                    to="/task"
+                    className={({isActive}) => (isActive ? style.active : "")}
+                >
+                    <div className={style.link}>
                         <IconTask />
                         <span>タスク</span>
-                    </NavLink>
-                </div>
+                    </div>
+                </NavLink>
             </div>
         </div>
     );
