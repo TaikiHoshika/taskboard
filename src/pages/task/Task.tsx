@@ -1,27 +1,32 @@
+import { useEffect, useState } from "react";
 import style from "./Task.module.scss";
 import TaskCard from "./components/TaskCard";
+import axios from "axios";
+import TypeTask from "../../types/TypeTask";
+import TypeTasks from "../../types/TypeTasks";
 
 const Task = () => {
+    const [tasks, setTasks] = useState<TypeTasks>();
+
+    const getTasks = async () => {
+        await axios.get(
+            "http://localhost:8000/task"
+        ).then((response) => {
+            const taskList: TypeTasks = response.data;
+            taskList.sort((x, y) => x === y ? 0 : x ? -1 : 1);
+            setTasks(taskList);
+        });
+    };
+
+    useEffect(() => {
+        getTasks();
+    }, []);
+
     return (
         <div className={style.container}>
-            <TaskCard
-                user={"TestUser01"}
-                buyAt={new Date(2023, 11, 1, 0, 0, 0)}
-                deliveryAt={new Date(2023, 11, 10, 23, 59, 59)}
-                sales={3000}
-                amount={1}
-                step={0}
-                isPinned={true}
-            />
-            <TaskCard
-                user={"TestUser02"}
-                buyAt={new Date(2023, 10, 1, 0, 0, 0)}
-                deliveryAt={new Date(2023, 11, 10, 23, 59, 59)}
-                sales={6000}
-                amount={2}
-                step={2}
-                isPinned={false}
-            />
+            {tasks?.map((data: TypeTask) => {
+                return <TaskCard {...data} />
+            })}
         </div>
     );
 }

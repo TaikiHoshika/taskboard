@@ -5,26 +5,17 @@ import ja from "date-fns/locale/ja";
 import Stepper from "../../../components/stepper/Stepper";
 import IconPin from "@mui/icons-material/PushPin";
 import style from "./TaskCard.module.scss";
-
-type props = {
-    user: string;
-    buyAt: Date;
-    deliveryAt: Date;
-    sales: number;
-    amount: number;
-    step: number;
-    isPinned: boolean;
-}
+import TypeTask from "../../../types/TypeTask";
 
 const formatDate = (date: Date, format: string): string => {
-    return formatFns(utcToZonedTime(date.toISOString(), "Asia/Tokyo"), format, {locale: ja, timeZone: "Asia/Tokyo"})
+    return formatFns(utcToZonedTime(date, "Asia/Tokyo"), format, {locale: ja, timeZone: "Asia/Tokyo"})
 }
 
 const getDateDistance = (to: Date, from: Date): number => {
-    return differenceInCalendarDays(utcToZonedTime(to.toISOString(), "Asia/Tokyo"), utcToZonedTime(from.toISOString(), "Asia/Tokyo"))
+    return differenceInCalendarDays(utcToZonedTime(to, "Asia/Tokyo"), utcToZonedTime(from, "Asia/Tokyo"))
 }
 
-const TaskCard = (props: props) => {
+const TaskCard = (props: TypeTask) => {
     const [isPinned, setIsPinned] = useState(props.isPinned);
     const handleOnClickPinButton = async () => {
         setIsPinned(!isPinned);
@@ -39,7 +30,7 @@ const TaskCard = (props: props) => {
                 </button>
             </div>
             <div className={style.user}>
-                <span>{props.user}</span>
+                <span>{props.user.name}</span>
             </div>
             <div className={`${style.infomation} ${style.buyAt}`}>
                 <span className={style.label}>購入日</span>
