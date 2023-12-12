@@ -6,9 +6,16 @@ import TypeTask from "../../types/TypeTask";
 import TypeTasks from "../../types/TypeTasks";
 import CreateTask from "./components/CreateTask";
 
+import IconCreateTask from "@mui/icons-material/NoteAdd";
+import Button from "../../components/button/Button";
+
 const Task = () => {
     const [tasks, setTasks] = useState<TypeTasks>();
-    const [isShowCreateTask, setIsShowCreateTask] = useState<boolean>(true);
+    const [isShowCreateTask, setIsShowCreateTask] = useState<boolean>(false);
+
+    const handleShowCreateTask= () => {
+        setIsShowCreateTask((prev) => !prev);
+    }
 
     const getTasks = async () => {
         await axios.get(
@@ -27,11 +34,27 @@ const Task = () => {
     return (
         <>
             <div className={style.container}>
+                <div className={style.toolBox}>
+                    <div className={style.column}>
+                        <input
+                            type="text"
+                            placeholder="タスクを検索..."
+                            className={style.search}
+                        />
+                        <Button onClick={handleShowCreateTask}>
+                            <IconCreateTask />
+                            <span>タスクを追加</span>
+                        </Button>
+                    </div>
+                </div>
                 {tasks?.map((data: TypeTask) => {
                     return <TaskCard {...data} />
                 })}
             </div>
-            <CreateTask isShow={isShowCreateTask} />
+            <CreateTask
+                isShow={isShowCreateTask}
+                onClose={handleShowCreateTask}
+            />
         </>
     );
 }

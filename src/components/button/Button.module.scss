@@ -1,0 +1,26 @@
+.button {
+    background-color: var(--color-primary);
+    border: none;
+    border-bottom: solid 5px;
+    border-bottom-color: var(--color-primary-dark);
+
+    font-size: 18px;
+    color: var(--color-main);
+
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 46px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    &.bold {
+        font-weight: bold;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}

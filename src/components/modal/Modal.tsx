@@ -1,10 +1,14 @@
 import { FC, ReactNode } from "react";
 import style from "./Modal.module.scss";
 
-const Modal: FC<{children: ReactNode}> = ({children}) => {
+type props = {
+    children: ReactNode;
+}
+
+const Modal = (props: props) => {
     return (
         <div className={style.background}>
-            {children}
+            {props.children}
         </div>
     );
 }

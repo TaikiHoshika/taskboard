@@ -1,9 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap");
-body {
+body, input, textarea, select, button {
     font-family: "M PLUS Rounded 1c", sans-serif;
     font-weight: 500;
-    color: rgb(75, 75, 75);
+    color: rgb(101, 99, 109);
     background-color: var(--color-background);
+}
+
+span, input, textarea, select, button {
+    transform: rotate(0.03deg);
 }
 
 * {
