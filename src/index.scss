@@ -10,6 +10,12 @@ span, input, textarea, select, button {
     transform: rotate(0.03deg);
 }
 
+a, input, textarea, select, button {
+    &:focus {
+        outline: none;
+    }
+}
+
 * {
     padding: 0px;
     margin: 0px;

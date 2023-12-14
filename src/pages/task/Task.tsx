@@ -11,6 +11,7 @@ import Button from "../../components/button/Button";
 
 const Task = () => {
     const [tasks, setTasks] = useState<TypeTasks>();
+    const [isError, setIsError] = useState<boolean>(false);
     const [isShowCreateTask, setIsShowCreateTask] = useState<boolean>(false);
 
     const handleShowCreateTask= () => {
@@ -24,6 +25,8 @@ const Task = () => {
             const taskList: TypeTasks = response.data;
             taskList.sort((x, y) => x === y ? 0 : x ? -1 : 1);
             setTasks(taskList);
+        }).catch(() => {
+            setIsError(true);
         });
     }
 
@@ -47,8 +50,16 @@ const Task = () => {
                         </Button>
                     </div>
                 </div>
-                {tasks?.map((data: TypeTask) => {
-                    return <TaskCard {...data} />
+                {isError && (
+                    <div>
+                        <span>読み込みエラーが発生しました</span>
+                        <Button>
+                            <span>再読み込み</span>
+                        </Button>
+                    </div>
+                )}
+                {tasks?.map((data: TypeTask, index: number) => {
+                    return <TaskCard {...data} key={index} />
                 })}
             </div>
             <CreateTask

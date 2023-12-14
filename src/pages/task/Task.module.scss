@@ -23,8 +23,6 @@
         .search {
             border: none;
             background-color: var(--color-background);
-            border-bottom: solid 5px;
-            border-bottom-color: var(--color-disable);
 
             font-size: 18px;
             padding-left: 10px;
@@ -32,6 +30,10 @@
             margin-right: auto;
 
             width: 60%;
+
+            &:hover {
+                filter: brightness(0.9);
+            }
         }
     }
 }

@@ -1,42 +1,47 @@
 .container {
     display: flex;
     flex-direction: row;
-}
 
-.node {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    > div {
+        display: flex;
+        flex-direction: row;
 
-    > .circle {
-        height: 16px;
-        width: 16px;
-        border-radius: 100%;
+        .node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         
-        background-color: var(--color-disable);
-
-        &.active {
-            background-color: var(--color-primary);
+            > .circle {
+                height: 16px;
+                width: 16px;
+                border-radius: 100%;
+                
+                background-color: var(--color-disable);
+        
+                &.active {
+                    background-color: var(--color-primary);
+                }
+            }
+        
+            > .label {
+                color: var(--color-font);
+            }
         }
-    }
-
-    > .label {
-        color: var(--color-font);
-    }
-}
-
-.line {
-    width: 20px;
-    position: relative;
-
-    top: 7px;
-    left: 0px;
-
-    border-top-style: solid;
-    border-top-width: 2px;
-    border-top-color: var(--color-disable);
-
-    &.active {
-        border-top-color: var(--color-primary);
+        
+        .line {
+            width: 20px;
+            position: relative;
+        
+            top: 7px;
+            left: 0px;
+        
+            border-top-style: solid;
+            border-top-width: 2px;
+            border-top-color: var(--color-disable);
+        
+            &.active {
+                border-top-color: var(--color-primary);
+            }
+        }
     }
 }
