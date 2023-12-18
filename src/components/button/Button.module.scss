@@ -16,12 +16,15 @@
     align-items: center;
     gap: 5px;
 
+    transition: 0.2s;
+
     &.bold {
         font-weight: bold;
     }
 
     &:hover {
         cursor: pointer;
-        filter: brightness(0.8);
+        background-color: var(--color-primary-hover);
+        border-bottom-color: var(--color-primary-dark-hover);
     }
 }

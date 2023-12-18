@@ -16,7 +16,7 @@
                 width: 16px;
                 border-radius: 100%;
                 
-                background-color: var(--color-disable);
+                background-color: var(--color-shadow);
         
                 &.active {
                     background-color: var(--color-primary);
@@ -37,7 +37,7 @@
         
             border-top-style: solid;
             border-top-width: 2px;
-            border-top-color: var(--color-disable);
+            border-top-color: var(--color-shadow);
         
             &.active {
                 border-top-color: var(--color-primary);

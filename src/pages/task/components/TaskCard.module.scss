@@ -4,7 +4,7 @@
     
     background-color: var(--color-main);
     border-bottom: solid 5px;
-    border-bottom-color: var(--color-disable);
+    border-bottom-color: var(--color-shadow);
     display: flex;
     box-sizing: border-box;
 
@@ -29,7 +29,7 @@
         svg {
             height: 35px;
             width: auto;
-            color: var(--color-disable);
+            color: var(--color-shadow);
             transition: 0.2s scale;
         }
 

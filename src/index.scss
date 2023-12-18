@@ -25,11 +25,14 @@ a, input, textarea, select, button {
     --color-main: rgb(255, 255, 255);
     --color-font: rgb(83, 93, 102);
     --color-primary: rgb(25, 137, 228);
-    --color-primary-dark: rgb(22, 89, 175);
-    --color-disable: rgb(198, 197, 206);
+    --color-primary-hover: rgb(14, 113, 194);
+    --color-primary-dark: rgb(19, 84, 170);
+    --color-primary-dark-hover: rgb(9, 61, 130);
+    --color-shadow: rgb(201, 200, 212);
+    --color-disabled: rgb(147, 146, 155);
     --color-background: rgb(227, 232, 235);
+    --color-background-hover: rgb(206, 213, 218);
     --color-background-modal: rgba(0, 0, 0, 0.6);
-    --style-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
     
     --border-radius: 4px;
 }
