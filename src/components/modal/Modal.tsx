@@ -7,7 +7,7 @@ type props = {
 
 const Modal = (props: props) => {
     return (
-        <div className={style.background}>
+        <div className={style.background} id="modal">
             {props.children}
         </div>
     );

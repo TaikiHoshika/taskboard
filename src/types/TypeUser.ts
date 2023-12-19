@@ -1,5 +1,5 @@
 type TypeUser = {
-    id: number;
+    id?: number;
     coconalaId: number;
     name: string;
 }

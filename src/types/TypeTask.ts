@@ -1,8 +1,8 @@
 import TypeUser from "./TypeUser";
 
 type TypeTask = {
-    id: number;
-    userId: number;
+    id?: number;
+    userId?: number;
     user: TypeUser;
     talkroomId: number;
     buyAt: Date;

@@ -8,6 +8,39 @@
     border-bottom: solid 5px;
     border-bottom-color: var(--color-disable);
 
+
+    > .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+
+        > span {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        > button {
+            border: none;
+            background-color: transparent;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+
+            cursor: pointer;
+            transition: 0.2s;
+
+            svg {
+                color: var(--color-font);
+            }
+
+            &:hover {
+                scale: 1.2;
+            }
+        }
+    }
+
     > form {
         height: 100%;
         width: 100%;
@@ -36,12 +69,6 @@
             &:disabled {
                 background-color: var(--color-disabled);
             }
-        }
-
-        .title {
-            font-weight: bold;
-            font-size: 20px;
-            margin-bottom: 20px;
         }
 
         .switch {

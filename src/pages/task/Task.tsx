@@ -8,9 +8,11 @@ import CreateTask from "./components/CreateTask";
 
 import IconCreateTask from "@mui/icons-material/NoteAdd";
 import Button from "../../components/button/Button";
+import CircleProgress from "../../components/circleProgress/CircleProgress";
 
 const Task = () => {
     const [tasks, setTasks] = useState<TypeTasks>();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isError, setIsError] = useState<boolean>(false);
     const [isShowCreateTask, setIsShowCreateTask] = useState<boolean>(false);
 
@@ -19,6 +21,8 @@ const Task = () => {
     }
 
     const getTasks = async () => {
+        setIsLoading(true);
+        setIsError(false);
         await axios.get(
             "http://localhost:8000/task"
         ).then((response) => {
@@ -28,6 +32,7 @@ const Task = () => {
         }).catch(() => {
             setIsError(true);
         });
+        setIsLoading(false);
     }
 
     useEffect(() => {
@@ -50,11 +55,16 @@ const Task = () => {
                         </Button>
                     </div>
                 </div>
+                {isLoading && (
+                    <div className={style.notification}>
+                        <CircleProgress />
+                    </div>
+                )}
                 {isError && (
-                    <div>
-                        <span>読み込みエラーが発生しました</span>
-                        <Button>
-                            <span>再読み込み</span>
+                    <div className={style.notification}>
+                        <span>コンテンツの読み込みに失敗しました</span>
+                        <Button onClick={getTasks}>
+                            <span>リロード</span>
                         </Button>
                     </div>
                 )}
