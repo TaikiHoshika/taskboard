@@ -6,13 +6,11 @@
     padding: 20px;
 
     border-bottom: solid 5px;
-    border-bottom-color: var(--color-disable);
-
+    border-bottom-color: var(--color-shadow);
 
     > .header {
         display: flex;
         align-items: center;
-        margin-bottom: 20px;
 
         > span {
             font-weight: bold;
@@ -71,14 +69,26 @@
             }
         }
 
-        .switch {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
         span.label {
             font-weight: bold;
+        }
+
+        .hasUnit {
+            background-color: var(--color-background);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            transition: 0.2s;
+            
+            > span {
+                width: 50px;
+                font-size: 18px;
+                padding-right: 10px;
+            }
+
+            &:hover, &:hover > input {
+                background-color: var(--color-background-hover);
+            }
         }
 
         .submit {
@@ -111,7 +121,6 @@
             }
         }
 
-
         .row {
             display: flex;
             justify-content: space-between;
@@ -122,6 +131,13 @@
                 flex-direction: column ;
                 width: 100%;
             }
+        }
+
+        .switch, .row > div.switch {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
         }
     }
 }

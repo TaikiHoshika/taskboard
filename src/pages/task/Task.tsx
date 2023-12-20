@@ -7,7 +7,7 @@ import TypeTasks from "../../types/TypeTasks";
 import CreateTask from "./components/CreateTask";
 
 import IconCreateTask from "@mui/icons-material/NoteAdd";
-import Button from "../../components/button/Button";
+import Button from "../../components/input/button/Button";
 import CircleProgress from "../../components/circleProgress/CircleProgress";
 
 const Task = () => {
@@ -27,7 +27,7 @@ const Task = () => {
             "http://localhost:8000/task"
         ).then((response) => {
             const taskList: TypeTasks = response.data;
-            taskList.sort((x, y) => x === y ? 0 : x ? -1 : 1);
+            taskList?.sort((x, y) => x === y ? 0 : x ? -1 : 1);
             setTasks(taskList);
         }).catch(() => {
             setIsError(true);

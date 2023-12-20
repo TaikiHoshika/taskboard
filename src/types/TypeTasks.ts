@@ -1,5 +1,5 @@
 import TypeTask from "./TypeTask";
 
-type TypeTasks = Array<TypeTask>;
+type TypeTasks = Array<TypeTask> | null;
 
 export default TypeTasks;

@@ -3,11 +3,12 @@ import style from "./CreateTask.module.scss";
 
 import IconClose from "@mui/icons-material/Close";
 import axios from "axios";
-import Switch from "../../../components/switch/Switch";
+import Switch from "../../../components/input/switch/Switch";
 import { FormEvent, useState, useEffect, KeyboardEvent } from "react";
 import TypeTask from "../../../types/TypeTask";
 import TypeUsers from "../../../types/TypeUsers";
 import TypeUser from "../../../types/TypeUser";
+import HorizontalRule from "../../../components/horizontalRule/HorizontalRule";
 
 type props = {
     isShow: boolean;
@@ -20,7 +21,9 @@ const CreateTask = (props: props) => {
         event.preventDefault();
         const form = new FormData(event.currentTarget);
 
+        /*
         if(selectExistUser) {
+            form.userId = Number(form.get("user"));
             console.log(form.get("user"));
         } else {
             console.log(form.get("userName"));
@@ -32,25 +35,32 @@ const CreateTask = (props: props) => {
         console.log(form.get("delivaryAt"));
         console.log(form.get("amount"));
         console.log(form.get("sales"));
+        */
+        
+        const userName: string | null = form.get("userName")?.toString() || null;
+        const userId: number | null = Number(form.get("userUrl")?.toString().replace(new RegExp("https://coconala.com/users/|/"), "")) || null;
+        const user: number | null = Number(form.get("user")) || null;
 
-        axios.post("http://localhost:8000/task/create",{
-            user: {
+        const talkroomId: number | null = Number(form.get("talkroomUrl")?.toString().replace(new RegExp("https://coconala.com/talkrooms/|/"), "")) || null;
 
-            },
-            talkroomId: 0,
-            buyAt: new Date(),
-            deliveryAt: new Date(),
-            sales: 0,
-            amount: 0,
-            step: 0,
-            isPinned: false
-        } as TypeTask).then((response) => {
+        // 簡易バリデーション
+
+
+        axios.post("http://localhost:8000/user/create",{
+            coconalaId: userId,
+            name: userName
+        } as TypeUser).then((response) => {
             console.log(response.data);
+            props.onClose();
+
         }).catch(() => {
             console.log("APIに接続できませんでした");
         })
     }
 
+    const [selectExistUser, setSelectExistUser] = useState<boolean>(false);
+    const [addPin, setAddPin] = useState<boolean>(false);
+    const [useDetailedDelivaryDate, setUseDetailedDelivaryDate] = useState<boolean>(false);
     const [existUsers, setExistUsers] = useState<TypeUsers>(null);
 
     const getUsers = () => {
@@ -59,6 +69,8 @@ const CreateTask = (props: props) => {
                 "http://localhost:8000/user"
             ).then((response) => {
                 setExistUsers(response.data);
+            }).catch((error) => {
+                setExistUsers(null);
             });
         } else {
             setExistUsers(null);
@@ -68,8 +80,6 @@ const CreateTask = (props: props) => {
     useEffect(() => {
         getUsers();
     }, [props.isShow])
-
-    const [selectExistUser, setSelectExistUser] = useState<boolean>(false);
 
     return (props.isShow ? (
         <Modal>
@@ -83,25 +93,27 @@ const CreateTask = (props: props) => {
                         <IconClose />
                     </button>
                 </div>
+                <HorizontalRule />
                 <form onSubmit={handleOnSubmit}>
-                    <div className={style.switch}>
-                        <Switch
-                            name={"selectExistUser"}
-                            onChange={() => setSelectExistUser((prev) => (!prev))}
-                        />
-                        <span>既存ユーザーを選択</span>
-                    </div>
-                    <div className={style.switch}>
-                        <Switch name={"addPinned"} />
-                        <span>ブックマークに追加</span>
-                    </div>
                     <div className={style.row}>
                         <div>
                             <span>ユーザー名</span>
                             <input type="text" name="userName" disabled={selectExistUser} />
                         </div>
                         <div>
-                            <span>ユーザー名</span>
+                            <span>ユーザーURL / ID</span>
+                            <input type="text" name="userUrl" disabled={selectExistUser} placeholder="https://coconala.com/users/" />
+                        </div>
+                    </div>
+                    <div  className={style.row}>
+                        <div className={style.switch}>
+                            <Switch
+                                name={"selectExistUser"}
+                                onChange={() => setSelectExistUser((prev) => (!prev))}
+                            />
+                            <span>既存ユーザーを選択</span>
+                        </div>
+                        <div>
                             <select name="user" disabled={!selectExistUser}>
                             {existUsers?.map((user: TypeUser) => {
                                 return <option value={user.id} key={user.id}>{user.name}</option>
@@ -109,18 +121,11 @@ const CreateTask = (props: props) => {
                             </select>
                         </div>
                     </div>
+                    <HorizontalRule />
                     <div className={style.row}>
                         <div>
-                            <span>ユーザーID</span>
-                            <input type="number" name="userId" disabled={selectExistUser} />
-                        </div>
-                        <div>
-                        </div>
-                    </div>
-                    <div className={style.row}>
-                        <div>
-                            <span>トークルームURL</span>
-                            <input type="text" name="talkroomUrl" />
+                            <span>トークルームURL / ID</span>
+                            <input type="text" name="talkroomUrl" placeholder="https://coconala.com/talkrooms/"/>
                         </div>
                     </div>
                     <div className={style.row}>
@@ -130,7 +135,22 @@ const CreateTask = (props: props) => {
                         </div>
                         <div>
                             <span>納品予定日</span>
-                            <input type="date" name="delivaryAt" />
+                            <div className={style.hasUnit}>
+                                <input type="number" name="delivaryAt" placeholder="必要週" defaultValue={2} disabled={useDetailedDelivaryDate} />
+                                <span>週間</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={style.row}>
+                        <div className={style.switch}>
+                            <Switch
+                                name={"useDetailedDelivaryDate"}
+                                onChange={() => setUseDetailedDelivaryDate((prev) => (!prev))}
+                            />
+                            <span>納品予定日を任意設定</span>
+                        </div>
+                        <div>
+                            <input type="date" name="delivaryAt" disabled={!useDetailedDelivaryDate} />
                         </div>
                     </div>
                     <div className={style.row}>
@@ -142,6 +162,13 @@ const CreateTask = (props: props) => {
                             <span>売上</span>
                             <input type="number" name="sales" defaultValue={3000} />
                         </div>
+                    </div>
+                    <div className={style.switch}>
+                        <Switch
+                            name={"addPin"}
+                            onChange={() => setAddPin((prev) => (!prev))}
+                        />
+                        <span>ブックマークに追加</span>
                     </div>
                     <div className={style.submit}>
                         <input type="submit" value={"追加"} />
