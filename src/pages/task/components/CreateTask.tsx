@@ -46,7 +46,7 @@ const CreateTask = (props: props) => {
         // 簡易バリデーション
 
 
-        axios.post("http://localhost:8000/user/create",{
+        axios.post("http://localhost:8000/user",{
             coconalaId: userId,
             name: userName
         } as TypeUser).then((response) => {

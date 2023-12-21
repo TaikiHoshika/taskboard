@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, MouseEvent } from "react";
 import {format as formatFns, utcToZonedTime} from "date-fns-tz";
 import { differenceInCalendarDays } from "date-fns";
 import ja from "date-fns/locale/ja";
@@ -6,6 +6,7 @@ import Stepper from "../../../components/stepper/Stepper";
 import IconPin from "@mui/icons-material/PushPin";
 import style from "./TaskCard.module.scss";
 import TypeTask from "../../../types/TypeTask";
+import axios from "axios";
 
 const formatDate = (date: Date, format: string): string => {
     return formatFns(utcToZonedTime(date, "Asia/Tokyo"), format, {locale: ja, timeZone: "Asia/Tokyo"})
@@ -17,9 +18,13 @@ const getDateDistance = (to: Date, from: Date): number => {
 
 const TaskCard = (props: TypeTask) => {
     const [isPinned, setIsPinned] = useState(props.isPinned);
+
     const handleOnClickPinButton = async () => {
-        setIsPinned(!isPinned);
-        // バックエンドに問い合わせDB更新
+        await axios.patch(`http://localhost:8000/task/${props.id}`, {
+            isPinned: !isPinned
+        }).then((response) => {
+            response.data.isSuccess && setIsPinned((prev) => !prev);
+        });
     }
 
     return (
